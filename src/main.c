@@ -14,16 +14,14 @@ void convert(char *nbr) {
     if (str_equal(nbr, "10")) {
         ft_putstr("ten");
     }
-    if (str_equal(nbr, "13")) {
-        ft_putstr("thirteen");
-    }
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        write(STDERR_FILENO, "Error\n", 7);
+    if (!check_args(argc)) {
         return EXIT_FAILURE;
     }
+
+
 
     char* arg1 = argv[1];
     arg1 = skip_space(arg1);

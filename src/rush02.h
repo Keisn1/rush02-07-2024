@@ -16,6 +16,9 @@ typedef enum BOOL_ {
 
 /* prototypes */
 
+/* errors.c */
+t_bool check_args(int argc);
+
 /* string.c */
 char* skip_space(char *str);
 int len_number(char* s);
