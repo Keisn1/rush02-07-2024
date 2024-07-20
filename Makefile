@@ -7,7 +7,10 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-all: example
+all: rush-02
+
+rush-02: main.c example2.o example3.o
+	$(CC) $(CFLAGS) -o $@ main.c example2.o example3.o
 
 example2.o: example2.c
 	$(CC) $(CFLAGS) -c -o $@ example2.c
@@ -15,9 +18,6 @@ example2.o: example2.c
 example3.o: example3.c
 	$(CC) $(CFLAGS) -c -o $@ example3.c
 
-example: example.c example2.o example3.o
-	$(CC) $(CFLAGS) -o $@ example.c example2.o example3.o
-
-fclean: ; rm -f example example2.o example3.o
+fclean: ; rm -f rush-02 example2.o example3.o
 
 # end
