@@ -20,7 +20,7 @@ int my_fun(int rest, char* nbr, t_SpellNode* spell_nodes) {
 	char* ret;
 	int size;
 
-	size = (((ft_strlen(nbr)-1) / 3) * 3) + 1 + 1;
+	size = (((ft_strlen(nbr)-1) / 3) * 3) + 2;
 	new_nbr2 = (char*)malloc(sizeof(char) * size);
 	new_nbr2[0] = '1';
 	for (int i = 1; i < size; i++) {
