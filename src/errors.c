@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:02:15 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 15:02:16 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 21:55:17 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ t_bool	check_nbr(char *str)
 		write(STDERR_FILENO, "Error\n", 7);
 		return (FALSE);
 	}
-
 	str = skip_digits(str);
-
 	if (*str != '\0')
 	{
 		write(STDERR_FILENO, "Error\n", 7);
@@ -56,6 +54,12 @@ int	error(char *type, char *suppl)
 		ft_putstr_err(suppl);
 		ft_putstr_err("\n");
 		return (-3);
+	}
+	if (str_equal(type, "file error"))
+	{
+		ft_putstr_err("Error");
+		ft_putstr_err("\n");
+		return (-4);
 	}
 	return (-1);
 }

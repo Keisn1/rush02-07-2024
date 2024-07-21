@@ -83,8 +83,6 @@ int	convert_bigger(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 
 int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 {
-	int	rest;
-
 	if (ft_strlen(nbr) == 1)
 		return (convert_one_digit_nbr(nbr, spell_nodes, !first));
 	if (ft_strlen(nbr) == 2)

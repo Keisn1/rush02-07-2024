@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:02:39 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 20:05:16 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 21:52:28 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define RUSH02_H
 
 /* libraries */
+# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 
 /* Makro Symbols */
 # define EXIT_FAILURE 1
@@ -53,8 +53,8 @@ unsigned int			ft_strlcpy(char *dest, char *src, unsigned int size);
 void					ft_putnbr(int nb);
 void					ft_putchar_err(char c);
 void					ft_putstr_err(char *str);
-char* ft_strchr(char* str, int c);
-char *ft_strdup(char *src);
+char					*ft_strchr(char *str, int c);
+char					*ft_strdup(char *src);
 
 /* spell_node */
 typedef struct spell_node
@@ -92,9 +92,9 @@ int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
 int						write_tens_place(char *nbr, t_SpellNode *spell_nodes);
 
 /* nick.c */
-void parse_buffer(char* buffer,  t_SpellNode** head);
-int open_file(int *fd, char* filename);
-int close_file(int *fd);
-int read_file(int *fd, char *buffer, int buffer_size);
+void					parse_buffer(char *buffer, t_SpellNode **head);
+int						open_file(int *fd, char *filename);
+int						close_file(int *fd);
+int						read_file(int *fd, char *buffer, int buffer_size);
 
 #endif // RUSH02_H
