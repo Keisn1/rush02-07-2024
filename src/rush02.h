@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:02:39 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 21:52:28 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 22:26:12 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int						error(char *msg, char *suppl);
 /* string.c */
 char					*skip_space(char *str);
 char					*skip_digits(char *str);
-char	*skip_zeros(char *str);
+char					*skip_zeros(char *str);
 int						len_number(char *s);
 t_bool					is_space(char c);
 t_bool					str_equal(char *str1, char *str2);
@@ -79,9 +79,12 @@ char					*get_hundreds_place(char *nbr);
 
 /* conversions.c */
 
-int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first);
-int	convert_larger_999(char *nbr, t_SpellNode *spell_nodes, t_bool first);
-int	convert_prefix(int rest, char *nbr, t_SpellNode *spell_nodes, t_bool first);
+int						convert(char *nbr, t_SpellNode *spell_nodes,
+							t_bool first);
+int						convert_larger_999(char *nbr, t_SpellNode *spell_nodes,
+							t_bool first);
+int						convert_prefix(int rest, char *nbr,
+							t_SpellNode *spell_nodes, t_bool first);
 int						convert_one_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes, t_bool with_whitespace);
 int						convert_two_digit_nbr(char *nbr,

@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:21:45 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 22:19:45 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 22:25:59 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 	return (convert_larger_999(nbr, spell_nodes, first));
 }
 
-int convert_cubics(char *nbr, t_SpellNode* spell_nodes, t_bool first) {
+int	convert_cubics(char *nbr, t_SpellNode *spell_nodes, t_bool first)
+{
 	char	*new_nbr2;
-	char *ret;
+	char	*ret;
 	int		rest;
 	int		size;
 	int		i;
@@ -41,18 +42,17 @@ int convert_cubics(char *nbr, t_SpellNode* spell_nodes, t_bool first) {
 		new_nbr2[i++] = '0';
 	}
 	new_nbr2[size - 1] = '\0';
-
 	size = convert_prefix(rest, nbr, spell_nodes, first);
 	ret = find_spelled_out(new_nbr2, spell_nodes);
 	ft_putstr(" ");
 	ft_putstr(ret);
 	free(new_nbr2);
-	return size;
+	return (size);
 }
 
 int	convert_larger_999(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 {
-	int		size;
+	int	size;
 
 	size = convert_cubics(nbr, spell_nodes, first);
 	nbr += size;

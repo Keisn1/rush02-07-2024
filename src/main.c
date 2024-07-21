@@ -12,6 +12,12 @@
 
 #include "rush02.h"
 
+void free_objects(t_SpellNode* spell_nodes, char* nbr, int fd) {
+	free(nbr);
+	free_spell_nodes(spell_nodes);
+	close_file(&fd);
+}
+
 int	main(int argc, char **argv)
 {
 	t_SpellNode	*spell_nodes;
@@ -27,21 +33,17 @@ int	main(int argc, char **argv)
 	parse_buffer(buffer, &spell_nodes);
 	if (!check_nbr(argv[1]))
 	{
-		free_spell_nodes(spell_nodes);
-		close_file(&fd);
+		free_objects(spell_nodes, NULL, fd);
 		return (EXIT_FAILURE);
 	}
 	nbr = parse_nbr(argv[1]);
 	if (convert(nbr, spell_nodes, TRUE) < 0)
 	{
-		free(nbr);
-		free_spell_nodes(spell_nodes);
-		close_file(&fd);
+
+		free_objects(spell_nodes, nbr, fd);
 		return (EXIT_FAILURE);
 	}
 	ft_putstr("\n");
-	free(nbr);
-	free_spell_nodes(spell_nodes);
-	close_file(&fd);
+	free_objects(spell_nodes, nbr, fd);
 	return (EXIT_SUCCESS);
 }
