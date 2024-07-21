@@ -27,7 +27,7 @@ t_SpellNode	*create_node(char *numerical, char *spelled_out)
 	return (new_node);
 }
 
-t_SpellNode	*create_spell_nodes(char *numerical[], char *spelled_out[])
+t_SpellNode	*create_spell_nodes(char *numerical[], char *spelled_out[], int size)
 {
 	t_SpellNode	*head;
 	t_SpellNode	*current;
@@ -37,7 +37,7 @@ t_SpellNode	*create_spell_nodes(char *numerical[], char *spelled_out[])
 	head = NULL;
 	current = NULL;
 	count = 0;
-	while (count < 9)
+	while (count < size)
 	{
 		new_node = create_node(numerical[count], spelled_out[count]);
 		if (head == NULL)
@@ -54,9 +54,9 @@ t_SpellNode	*create_spell_nodes(char *numerical[], char *spelled_out[])
 	return (head);
 }
 
-t_SpellNode	*init_spell_nodes(char*** dict)
+t_SpellNode	*init_spell_nodes(char*** dict, int size)
 {
-	return (create_spell_nodes(dict[0], dict[1]));
+	return (create_spell_nodes(dict[0], dict[1], size));
 }
 
 void	free_spell_nodes(t_SpellNode *head)

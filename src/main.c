@@ -37,13 +37,14 @@ int	main(int argc, char *argv[])
 	}
 
 	dict = (char***)malloc(sizeof(char**) * 3);
+    int size = 9;
 	char	*numerical[] = {"0", "1", "2", "3", "10", "11", "20", "100",
 			"1000"};
 	char	*spelled_out[] = {"zero", "one", "two", "three", "ten", "eleven",
 			"twenty", "hundred", "thousand"};
     dict[0] = numerical;
     dict[1] = spelled_out;
-	spell_nodes = init_spell_nodes(dict);
+	spell_nodes = init_spell_nodes(dict, size);
     free(dict);
 	ft_putstr(argv[1]);
 	ft_putstr(": ");
