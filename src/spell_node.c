@@ -54,14 +54,9 @@ t_SpellNode	*create_spell_nodes(char *numerical[], char *spelled_out[])
 	return (head);
 }
 
-t_SpellNode	*init_spell_nodes(void)
+t_SpellNode	*init_spell_nodes(char*** dict)
 {
-	char	*numerical[] = {"0", "1", "2", "3", "10", "11", "20", "100",
-			"1000"};
-	char	*spelled_out[] = {"zero", "one", "two", "three", "ten", "eleven",
-			"twenty", "hundred", "thousand"};
-
-	return (create_spell_nodes(numerical, spelled_out));
+	return (create_spell_nodes(dict[0], dict[1]));
 }
 
 void	free_spell_nodes(t_SpellNode *head)
@@ -80,23 +75,3 @@ void	free_spell_nodes(t_SpellNode *head)
 	return ;
 }
 
-char	*find_spelled_out(char *nbr, t_SpellNode *spell_nodes)
-{
-	while (spell_nodes != NULL)
-	{
-		if (str_equal(nbr, spell_nodes->numerical))
-			return (spell_nodes->spelled_out);
-		spell_nodes = spell_nodes->next;
-	}
-	return (NULL);
-}
-
-void	print_node(t_SpellNode *sn)
-{
-	ft_putstr("Numerical: ");
-	ft_putstr(sn->numerical);
-	ft_putstr("\n");
-	ft_putstr("Spelled out: ");
-	ft_putstr(sn->spelled_out);
-	ft_putstr("\n");
-}
