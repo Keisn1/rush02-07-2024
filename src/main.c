@@ -89,6 +89,7 @@ int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 		return (convert_two_digit_nbr(nbr, spell_nodes, !first));
 	if (ft_strlen(nbr) == 3)
 		return (convert_three_digit_nbr(nbr, spell_nodes, !first));
+
 	rest = ft_strlen(nbr) % 3;
 	return (convert_bigger(rest, nbr, spell_nodes, first));
 }
