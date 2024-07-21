@@ -40,7 +40,14 @@ int	error(char *type, char *suppl)
 		ft_putstr_err("Error finding");
 		ft_putstr_err(suppl);
 		ft_putstr_err("\n");
-		return (-1);
+		return (-2);
+	}
+	if (str_equal(type, "memory allocation"))
+	{
+		ft_putstr_err("Error allocating memory: ");
+		ft_putstr_err(suppl);
+		ft_putstr_err("\n");
+		return (-3);
 	}
 	return (-1);
 }
