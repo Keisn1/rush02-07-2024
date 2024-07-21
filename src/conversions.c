@@ -15,18 +15,12 @@
 
 int	pre_check_3_digits(char *nbr, t_SpellNode *spell_nodes )
 {
-	/* char	*ret; */
-
 	if (str_equal(nbr, "000"))
 		return (0);
-	if (*nbr == '0')
+	if (*nbr == '0') {
+		ft_putstr(" ");
 		return (convert_two_digit_nbr(++nbr, spell_nodes));
-	/* ret = find_spelled_out(nbr, spell_nodes); */
-	/* if (ret != NULL) */
-	/* { */
-	/* 	ft_putstr(ret); */
-	/* 	return (0); */
-	/* } */
+	}
 	return (1);
 }
 
@@ -36,14 +30,17 @@ int	pre_check(char *nbr, t_SpellNode *spell_nodes)
 
 	if (str_equal(nbr, "00"))
 		return (0);
-	if (*nbr == '0')
+	if (*nbr == '0') {
+		ft_putstr(" ");
 		return (convert_one_digit_nbr(++nbr, spell_nodes));
+	}
 	ret = find_spelled_out(nbr, spell_nodes);
 	if (ret != NULL)
-	{
-		ft_putstr(ret);
-		return (0);
-	}
+		{
+			ft_putstr(" ");
+			ft_putstr(ret);
+			return (0);
+		}
 	return (1);
 }
 

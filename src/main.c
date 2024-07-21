@@ -6,95 +6,88 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:07:39 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 15:07:40 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 18:42:48 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush02.h"
+#include <stdlib.h>
+int	convert(char *nbr, t_SpellNode *spell_nodes);
+
+int my_fun(int rest, char* nbr, t_SpellNode* spell_nodes) {
+	char	*new_nbr;
+	char	*new_nbr2;
+	char* ret;
+	int size;
+
+	size = (((ft_strlen(nbr)-1) / 3) * 3) + 1 + 1;
+	new_nbr2 = (char*)malloc(sizeof(char) * size);
+	new_nbr2[0] = '1';
+	for (int i = 1; i < size; i++) {
+		new_nbr2[i] = '0';
+	}
+	new_nbr2[size-1] = '\0';
+
+	if (rest == 1) {
+		new_nbr = get_ones_place(nbr);
+		convert_one_digit_nbr(new_nbr, spell_nodes);
+		nbr += rest;
+	}
+	if (rest == 2) {
+		new_nbr = get_tens_place(nbr, FALSE);
+		convert_two_digit_nbr(new_nbr, spell_nodes);
+		nbr += rest;
+	}
+	if (rest == 0) {
+		new_nbr = get_hundreds_place(nbr);
+		convert_three_digit_nbr(new_nbr, spell_nodes);
+		nbr +=3;
+	}
+	free(new_nbr);
+
+	ret = find_spelled_out(new_nbr2, spell_nodes);
+	ft_putstr(ret);
+	free(new_nbr2);
+	convert(nbr, spell_nodes);
+	return (0);
+}
 
 int	convert(char *nbr, t_SpellNode *spell_nodes)
 {
+	int		rest;
+
 	if (ft_strlen(nbr) == 1)
 		return (convert_one_digit_nbr(nbr, spell_nodes));
 	if (ft_strlen(nbr) == 2)
 		return (convert_two_digit_nbr(nbr, spell_nodes));
 	if (ft_strlen(nbr) == 3)
 		return (convert_three_digit_nbr(nbr, spell_nodes));
-
-    int rest = ft_strlen(nbr) % 3;
-
-    if (rest == 1) {
-        char* new_nbr = get_ones_place(nbr);
-        convert_one_digit_nbr(new_nbr, spell_nodes);
-        free(new_nbr);
-
-        if (ft_strlen(nbr) == 7) {
-            ft_putstr(" million");
-        } else {
-            ft_putstr(" thousand");
-        }
-
-        ft_putstr(" ");
-        convert(++nbr, spell_nodes);
-        return 0;
-    }
-
-    if (rest == 2) {
-        char* new_nbr = get_tens_place(nbr, FALSE);
-        convert_two_digit_nbr(new_nbr, spell_nodes);
-        free(new_nbr);
-
-        if (ft_strlen(nbr) == 8) {
-            ft_putstr(" million");
-        } else {
-            ft_putstr(" thousand");
-        }
-
-        ft_putstr(" ");
-        convert(nbr+2, spell_nodes);
-        return 0;
-    }
-
-    if (rest == 0) {
-        char* new_nbr = get_hundreds_place(nbr);
-        convert_three_digit_nbr(new_nbr, spell_nodes);
-        free(new_nbr);
-
-        if (ft_strlen(nbr) == 9) {
-            ft_putstr(" million");
-        } else {
-            ft_putstr(" thousand");
-        }
-
-        ft_putstr(" ");
-        convert(nbr+3, spell_nodes);
-        return 0;
-    }
-
-	return (0);
+	rest = ft_strlen(nbr) % 3;
+	return my_fun(rest, nbr, spell_nodes);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_SpellNode	*spell_nodes;
 	char		*nbr;
-    char*** dict;
+	char		***dict;
+	int			size;
+	char		*numerical[] = {"0", "1", "2", "3", "9", "10", "11", "20", "30",
+				"90", "100", "1000", "1000000"};
+	char		*spelled_out[] = {"zero", "one", "two", "three", "nine", "ten",
+				"eleven", "twenty", "thirty", "ninety", "hundred", "thousand",
+				"million"};
 
 	if (!check_args(argc))
 	{
 		return (EXIT_FAILURE);
 	}
-
-	dict = (char***)malloc(sizeof(char**) * 3);
-    int size = 13;
-	char	*numerical[] = {"0", "1", "2", "3", "9", "10", "11", "20","30", "90", "100",
-			"1000", "1000000"};
-	char	*spelled_out[] = {"zero", "one", "two", "three", "nine", "ten", "eleven",
-			"twenty", "thirty", "ninety", "hundred", "thousand", "million"};
-    dict[0] = numerical;
-    dict[1] = spelled_out;
+	dict = (char ***)malloc(sizeof(char **) * 3);
+	size = 13;
+	dict[0] = numerical;
+	dict[1] = spelled_out;
 	spell_nodes = init_spell_nodes(dict, size);
-    free(dict);
+	free(dict);
 	ft_putstr(argv[1]);
 	ft_putstr(": ");
 	if (!check_nbr(argv[1]))

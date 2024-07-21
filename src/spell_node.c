@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:22:02 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 15:56:33 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 18:42:44 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_SpellNode	*create_node(char *numerical, char *spelled_out)
 	return (new_node);
 }
 
-t_SpellNode	*create_spell_nodes(char *numerical[], char *spelled_out[], int size)
+t_SpellNode	*create_spell_nodes(char *numerical[], char *spelled_out[],
+		int size)
 {
 	t_SpellNode	*head;
 	t_SpellNode	*current;
@@ -54,7 +55,7 @@ t_SpellNode	*create_spell_nodes(char *numerical[], char *spelled_out[], int size
 	return (head);
 }
 
-t_SpellNode	*init_spell_nodes(char*** dict, int size)
+t_SpellNode	*init_spell_nodes(char ***dict, int size)
 {
 	return (create_spell_nodes(dict[0], dict[1], size));
 }
@@ -74,4 +75,3 @@ void	free_spell_nodes(t_SpellNode *head)
 	}
 	return ;
 }
-
