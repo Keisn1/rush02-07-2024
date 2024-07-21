@@ -29,8 +29,8 @@ t_SpellNode	*create_node(char *numerical, char *spelled_out)
 
 t_SpellNode	*init_spell_nodes(void)
 {
-	char		*numerical[] = {"0", "1", "2", "3", "10", "11", "20", "100"};
-	char		*spelled_out[] = {"zero", "one", "two", "three", "ten", "eleven", "twenty", "hundred"};
+	char		*numerical[] = {"0", "1", "2", "3", "10", "11", "20", "100", "1000"};
+	char		*spelled_out[] = {"zero", "one", "two", "three", "ten", "eleven", "twenty", "hundred", "thousand"};
 	t_SpellNode	*head;
 	t_SpellNode	*current;
 	int			count;
