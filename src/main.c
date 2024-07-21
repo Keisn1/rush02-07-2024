@@ -37,19 +37,28 @@ int convert_prefix(int rest, char *nbr, t_SpellNode *spell_nodes, t_bool first) 
 	return rest;
 }
 
+t_bool is_zero(char *str) {
+	while (*str) {
+		if (*str++ != '0') {
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
 int	convert_bigger(int rest, char *nbr, t_SpellNode *spell_nodes, t_bool first)
 {
 	char	*new_nbr2;
 	char	*ret;
 	int		size;
-	/* char	*new_nbr; */
+	int i;
 
 	size = (((ft_strlen(nbr) - 1) / 3) * 3) + 2;
 	new_nbr2 = (char *)malloc(sizeof(char) * size);
 	new_nbr2[0] = '1';
-	for (int i = 1; i < size; i++)
-	{
-		new_nbr2[i] = '0';
+	i = 1;
+	while (i < size) {
+		new_nbr2[i++] = '0';
 	}
 	new_nbr2[size - 1] = '\0';
 
@@ -59,9 +68,16 @@ int	convert_bigger(int rest, char *nbr, t_SpellNode *spell_nodes, t_bool first)
 	ft_putstr(" ");
 	ft_putstr(ret);
 	free(new_nbr2);
+	while (*nbr == '0') {
+		nbr++;
+	}
+	if (*nbr == '\0') {
+		return 0;
+	}
 	convert(nbr, spell_nodes, FALSE);
 	return (0);
 }
+
 
 int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 {
