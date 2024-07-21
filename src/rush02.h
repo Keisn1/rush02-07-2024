@@ -3,6 +3,7 @@
 
 /* libraries */
 #include <unistd.h>
+#include <stdlib.h>
 
 /* Makro Symbols */
 # define EXIT_FAILURE 1
@@ -18,6 +19,8 @@ typedef enum BOOL_ {
 
 /* errors.c */
 t_bool check_args(int argc);
+t_bool check_nbr(char *str);
+char *get_nbr(char *str);
 
 /* string.c */
 char* skip_space(char *str);

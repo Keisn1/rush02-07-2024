@@ -21,12 +21,6 @@ t_bool str_equal(char *str1, char *str2) {
     return TRUE;
 }
 
-char* skip_space(char *str) {
-    while (*str && is_space(*str))
-        str++;
-    return str;
-}
-
 
 int len_number(char* s) {
     int count = 0;
@@ -34,4 +28,22 @@ int len_number(char* s) {
         count++;
     }
     return count;
+}
+
+char* skip_space(char *str) {
+    while (*str && is_space(*str))
+        str++;
+    return str;
+}
+
+char *get_nbr(char *str) {
+    str = skip_space(str);
+    char* nbr = (char*)malloc(len_number(str)+1 * sizeof(char));
+    if (nbr == NULL) {
+        write(STDERR_FILENO, "Error\n", 7);
+        return NULL;
+    }
+
+    ft_strlcpy(nbr, str, len_number(str)+1);
+    return nbr;
 }

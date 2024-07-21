@@ -21,6 +21,6 @@ libft.o: libft.c
 errors.o: errors.c
 	$(CC) $(CFLAGS) -c -o $@ errors.c
 
-fclean: ; rm -f rush-02 string.o libft.o
+fclean: ; rm -f rush-02 string.o libft.o got
 
 # end
