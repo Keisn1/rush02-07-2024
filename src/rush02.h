@@ -33,12 +33,13 @@ typedef enum BOOL_
 /* errors.c */
 t_bool					check_args(int argc);
 t_bool					check_nbr(char *str);
-char					*get_nbr(char *str);
+char					*parse_nbr(char *str);
 int						error(char *msg, char *suppl);
 
 /* string.c */
 char					*skip_space(char *str);
 char					*skip_digits(char *str);
+char	*skip_zeros(char *str);
 int						len_number(char *s);
 t_bool					is_space(char c);
 t_bool					str_equal(char *str1, char *str2);
@@ -77,19 +78,23 @@ char					*get_ones_place(char *nbr);
 char					*get_hundreds_place(char *nbr);
 
 /* conversions.c */
-int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
+
+int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first);
+int	convert_bigger(char *nbr, t_SpellNode *spell_nodes, t_bool first);
+int	convert_prefix(int rest, char *nbr, t_SpellNode *spell_nodes, t_bool first);
 int						convert_one_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes, t_bool with_whitespace);
 int						convert_two_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes, t_bool with_whitespace);
 int						convert_three_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes, t_bool with_whitespace);
+int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
+int						write_tens_place(char *nbr, t_SpellNode *spell_nodes);
+int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
 int						pre_check_3_digits(char *nbr, t_SpellNode *spell_nodes,
 							t_bool with_whitespace);
 int						pre_check(char *nbr, t_SpellNode *spell_nodes,
 							t_bool with_whitespace);
-int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
-int						write_tens_place(char *nbr, t_SpellNode *spell_nodes);
 
 /* nick.c */
 void					parse_buffer(char *buffer, t_SpellNode **head);

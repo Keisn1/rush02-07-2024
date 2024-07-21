@@ -6,23 +6,22 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 21:52:48 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 21:56:18 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 21:59:42 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush02.h"
 
-void parse_buffer(char *buffer, t_SpellNode **head)
+void	parse_buffer(char *buffer, t_SpellNode **head)
 {
-	char *line_start;
-	char *line_end;
-	int index;
-	char *separator;
+	char	*line_start;
+	char	*line_end;
+	int		index;
+	char	*separator;
 
 	line_start = buffer;
 	line_end = NULL;
 	index = 0;
-
 	line_end = ft_strchr(line_start, '\n');
 	while (line_end != NULL)
 	{

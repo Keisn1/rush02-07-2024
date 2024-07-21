@@ -6,62 +6,73 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:21:45 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 20:02:47 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 22:10:59 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush02.h"
 
-int	convert_one_digit_nbr(char *nbr, t_SpellNode *spell_nodes,
-		t_bool with_whitespace)
+int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 {
-	char	*ret;
-
-	ret = find_spelled_out(nbr, spell_nodes);
-	if (ret == NULL)
-		return (error("find spelled_out", nbr));
-	if (with_whitespace)
-		ft_putstr(" ");
-	ft_putstr(ret);
-	return (0);
+	if (ft_strlen(nbr) == 1)
+		return (convert_one_digit_nbr(nbr, spell_nodes, !first));
+	if (ft_strlen(nbr) == 2)
+		return (convert_two_digit_nbr(nbr, spell_nodes, !first));
+	if (ft_strlen(nbr) == 3)
+		return (convert_three_digit_nbr(nbr, spell_nodes, !first));
+	return (convert_bigger(nbr, spell_nodes, first));
 }
 
-int	convert_two_digit_nbr(char *nbr, t_SpellNode *spell_nodes,
-		t_bool with_whitespace)
+int	convert_bigger(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 {
+	char	*new_nbr2;
 	char	*ret;
+	int		size;
+	int		i;
+	int		rest;
 
-	if (!pre_check(nbr, spell_nodes, with_whitespace))
-		return (0);
-	if (with_whitespace)
-		ft_putstr(" ");
-	write_tens_place(nbr, spell_nodes);
-	ft_putstr(" ");
-	nbr++;
-	ret = find_spelled_out(nbr, spell_nodes);
-	if (ret == NULL)
-		return (error("find spelled_out", nbr));
-	ft_putstr(ret);
-	return (0);
-}
-
-int	convert_three_digit_nbr(char *nbr, t_SpellNode *spell_nodes,
-		t_bool with_whitespace)
-{
-	char	*ret;
-
-	if (!pre_check_3_digits(nbr, spell_nodes, with_whitespace))
+	rest = ft_strlen(nbr) % 3;
+	size = (((ft_strlen(nbr) - 1) / 3) * 3) + 2;
+	new_nbr2 = (char *)malloc(sizeof(char) * size);
+	new_nbr2[0] = '1';
+	i = 1;
+	while (i < size)
 	{
-		return (0);
+		new_nbr2[i++] = '0';
 	}
-	if (with_whitespace)
-		ft_putstr(" ");
-	write_ones_place(nbr, spell_nodes);
+	new_nbr2[size - 1] = '\0';
+	nbr += convert_prefix(rest, nbr, spell_nodes, first);
+	ret = find_spelled_out(new_nbr2, spell_nodes);
 	ft_putstr(" ");
-	ret = find_spelled_out("100", spell_nodes);
-	if (ret == NULL)
-		return (error("find spelled_out", "100"));
 	ft_putstr(ret);
-	nbr++;
-	return (convert_two_digit_nbr(nbr, spell_nodes, TRUE));
+	free(new_nbr2);
+	nbr = skip_zeros(nbr);
+	if (*nbr == '\0')
+		return (0);
+	convert(nbr, spell_nodes, FALSE);
+	return (0);
+}
+
+int	convert_prefix(int rest, char *nbr, t_SpellNode *spell_nodes, t_bool first)
+{
+	char	*new_nbr;
+
+	if (rest == 1)
+	{
+		new_nbr = get_ones_place(nbr);
+		convert_one_digit_nbr(new_nbr, spell_nodes, !first);
+	}
+	if (rest == 2)
+	{
+		new_nbr = get_tens_place(nbr, FALSE);
+		convert_two_digit_nbr(new_nbr, spell_nodes, !first);
+	}
+	if (rest == 0)
+	{
+		new_nbr = get_hundreds_place(nbr);
+		convert_three_digit_nbr(new_nbr, spell_nodes, !first);
+		rest = 3;
+	}
+	free(new_nbr);
+	return (rest);
 }

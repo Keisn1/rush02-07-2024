@@ -16,6 +16,7 @@ MY_SOURCES = 	main.c		\
 		spell_node.c	\
 		spell_node2.c	\
 		conversions.c	\
+		conversions1.c	\
 		conversions2.c	\
 		places.c	\
 		libft.c		\

@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:31:12 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 15:31:13 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 22:01:58 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,4 @@ int	len_number(char *s)
 		count++;
 	}
 	return (count);
-}
-
-char	*skip_space(char *str)
-{
-	while (*str && is_space(*str))
-		str++;
-	return (str);
-}
-
-char	*skip_digits(char *str)
-{
-	while (*str && is_digit(*str))
-		str++;
-	return (str);
 }
