@@ -49,23 +49,21 @@ char* ft_strchr(char* str, int c)
 
 }
 
-char *ft_strdup(char *src)
+char	*ft_strdup(char *src)
 {
-    char *copy;
-    size_t len = ft_strlen(src) + 1;
+	char	*res_o;
+	char	*res;
+	int		len;
 
-    copy = (char *)malloc(len);
-    if (copy == NULL)
-    {
-        return NULL;
-    }
+	src = skip_space(src);
 
-    char *dest = copy;
-    while (*src)
-    {
-        *dest++ = *src++;
-    }
-    *dest = '\0';
-
-    return copy;
+	len = ft_strlen(src);
+	res = malloc((len + 1) * sizeof(char));
+	if (res == (void *)0)
+		return (res);
+	res_o = res;
+	while (*src)
+		*res++ = *src++;
+	*res = '\0';
+	return (res_o);
 }

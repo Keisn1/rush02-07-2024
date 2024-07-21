@@ -20,6 +20,7 @@ MY_SOURCES = 	main.c		\
 		places.c	\
 		libft.c		\
 		libft2.c	\
+		nick.c		\
 		string.c	\
 		string2.c
 

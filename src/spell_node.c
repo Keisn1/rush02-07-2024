@@ -70,6 +70,8 @@ void	free_spell_nodes(t_SpellNode *head)
 	while (current != NULL)
 	{
 		next = current->next;
+		free(current->numerical);
+		free(current->spelled_out);
 		free(current);
 		current = next;
 	}

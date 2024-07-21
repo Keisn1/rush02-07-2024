@@ -1,32 +1,29 @@
 #include "rush02.h"
 
-/* void parse_buffer(char* buffer, int *list_size, t_SpellNode *list) */
-/* { */
-/*     char *line_start = buffer; */
-/*     char *line_end = NULL; */
-/*     int index = 0; */
-/*     while((line_end = ft_strchr(line_start, '\n')) != NULL ) */
-/*     { */
-/*         *line_end = '\0'; */
 
-/*         char* separator = ft_strchr(line_start, ':'); */
+void parse_buffer(char* buffer,  t_SpellNode** head)
+{
+    char *line_start = buffer;
+    char *line_end = NULL;
+    int index = 0;
+    while((line_end = ft_strchr(line_start, '\n')) != NULL )
+    {
+        *line_end = '\0';
 
-/*         if (separator != NULL) */
-/*         { */
-/*             *separator = '\0'; */
-/*             separator++; */
+        char* separator = ft_strchr(line_start, ':');
 
-/*             list[index].number = ft_strdup(line_start); */
-/*             list[index].word = ft_strdup(separator); */
-/*             list[index].num_len = ft_strlen(line_start); */
+        if (separator != NULL)
+        {
+            *separator = '\0';
+            separator++;
 
-/*             index++; */
-/*         } */
-/*         line_start = line_end + 1; */
-/*     } */
-
-/*     *list_size = index; */
-/* } */
+            *head = create_node(ft_strdup(line_start), ft_strdup(separator));
+            head = &(*head)->next;
+            index++;
+        }
+        line_start = line_end + 1;
+    }
+}
 
 int open_file(int *fd, char* filename)
 {

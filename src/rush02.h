@@ -92,6 +92,7 @@ int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
 int						write_tens_place(char *nbr, t_SpellNode *spell_nodes);
 
 /* nick.c */
+void parse_buffer(char* buffer,  t_SpellNode** head);
 int open_file(int *fd, char* filename);
 int close_file(int *fd);
 int read_file(int *fd, char *buffer, int buffer_size);

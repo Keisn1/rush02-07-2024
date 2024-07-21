@@ -77,35 +77,72 @@ int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 	return (convert_bigger(rest, nbr, spell_nodes, first));
 }
 
-int	main(int argc, char *argv[])
+/* int	main(int argc, char *argv[]) */
+/* { */
+/* 	t_SpellNode	*spell_nodes; */
+/* 	char		*nbr; */
+/* 	char		***dict; */
+/* 	int			size; */
+/* 	char		*numerical[] = {"0", "1", "2", "3", "9", "10", "11", "20", "30", */
+/* 				"90", "100", "1000", "1000000"}; */
+/* 	char		*spelled_out[] = {"zero", "one", "two", "three", "nine", "ten", */
+/* 				"eleven", "twenty", "thirty", "ninety", "hundred", "thousand", */
+/* 				"million"}; */
+
+/* 	if (!check_args(argc)) */
+/* 	{ */
+/* 		return (EXIT_FAILURE); */
+/* 	} */
+/* 	dict = (char ***)malloc(sizeof(char **) * 3); */
+/* 	size = 13; */
+/* 	dict[0] = numerical; */
+/* 	dict[1] = spelled_out; */
+/* 	spell_nodes = init_spell_nodes(dict, size); */
+/* 	free(dict); */
+
+/* 	int fd; */
+/*     char buffer[1024]; */
+/*     open_file(&fd, "numbers.dict"); */
+/*     fd = 0; */
+/*     read_file(&fd, buffer, sizeof(buffer)); */
+/* 	t_SpellNode* head; */
+/*     parse_buffer(buffer, &head); */
+
+/* 	ft_putstr(argv[1]); */
+/* 	ft_putstr(": "); */
+/* 	if (!check_nbr(argv[1])) */
+/* 	{ */
+/* 		free_spell_nodes(spell_nodes); */
+/* 		return (EXIT_FAILURE); */
+/* 	} */
+/* 	nbr = get_nbr(argv[1]); */
+/* 	/\* if (convert(nbr, spell_nodes, TRUE) == -1) *\/ */
+/* 	/\* 	return (EXIT_FAILURE); *\/ */
+/* 	if (convert(nbr, head, TRUE) == -1) */
+/* 		return (EXIT_FAILURE); */
+/* 	ft_putstr("\n"); */
+/* 	free(nbr); */
+/* 	free_spell_nodes(spell_nodes); */
+
+/*     /\* close_file(&fd); *\/ */
+/* 	return (EXIT_SUCCESS); */
+/* } */
+
+int	main(int argc, char** argv)
 {
-	t_SpellNode	*spell_nodes;
-	char		*nbr;
-	char		***dict;
-	int			size;
-	char		*numerical[] = {"0", "1", "2", "3", "9", "10", "11", "20", "30",
-				"90", "100", "1000", "1000000"};
-	char		*spelled_out[] = {"zero", "one", "two", "three", "nine", "ten",
-				"eleven", "twenty", "thirty", "ninety", "hundred", "thousand",
-				"million"};
 
 	if (!check_args(argc))
-	{
 		return (EXIT_FAILURE);
-	}
-	dict = (char ***)malloc(sizeof(char **) * 3);
-	size = 13;
-	dict[0] = numerical;
-	dict[1] = spelled_out;
-	spell_nodes = init_spell_nodes(dict, size);
-	free(dict);
+	t_SpellNode	*spell_nodes;
 
-	/* int fd; */
-    /* char buffer[1024]; */
-    /* open_file(&fd, "numbers.dict"); */
-    /* fd = 0; */
-    /* read_file(&fd, buffer, sizeof(buffer)); */
-    /* parse_buffer(buffer, &list_size, list); */
+	int fd;
+	char buffer[1024];
+	char		*nbr;
+
+	fd = 0;
+	open_file(&fd, "numbers.dict");
+	read_file(&fd, buffer, sizeof(buffer));
+	parse_buffer(buffer, &spell_nodes);
 
 	ft_putstr(argv[1]);
 	ft_putstr(": ");
@@ -117,10 +154,12 @@ int	main(int argc, char *argv[])
 	nbr = get_nbr(argv[1]);
 	if (convert(nbr, spell_nodes, TRUE) == -1)
 		return (EXIT_FAILURE);
+	/* if (convert(nbr, head, TRUE) == -1) */
+	/* 	return (EXIT_FAILURE); */
 	ft_putstr("\n");
 	free(nbr);
 	free_spell_nodes(spell_nodes);
 
-    /* close_file(&fd); */
+    close_file(&fd);
 	return (EXIT_SUCCESS);
 }
