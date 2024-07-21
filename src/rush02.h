@@ -45,7 +45,12 @@ typedef struct spell_node {
 } SpellNode;
 
 SpellNode* create_node(char* numerical, char* spelled_out);
-void free_spell_nodes(SpellNode *head);
 SpellNode* init_spell_nodes();
+void free_spell_nodes(SpellNode *head);
 void print_node(SpellNode *sn);
+char *find_spelled_out(char* nbr, SpellNode *spell_nodes);
+
+/* places.c */
+char *get_tens_place(char *nbr);
+
 #endif // RUSH02_H

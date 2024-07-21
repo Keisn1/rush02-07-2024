@@ -15,7 +15,8 @@ MY_SOURCES = 	main.c 			\
 				string.c 		\
 				libft.c			\
 				errors.c		\
-				spell_node.c
+				spell_node.c	\
+				places.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

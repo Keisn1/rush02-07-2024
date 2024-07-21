@@ -46,6 +46,15 @@ void free_spell_nodes(SpellNode *head) {
     return;
 }
 
+char *find_spelled_out(char* nbr, SpellNode *spell_nodes) {
+    while (spell_nodes != NULL) {
+        if (str_equal(nbr, spell_nodes->numerical))
+            return spell_nodes->spelled_out;
+        spell_nodes = spell_nodes->next;
+    }
+    return NULL;
+}
+
 
 void print_node(SpellNode *sn) {
     ft_putstr("Numerical: ");

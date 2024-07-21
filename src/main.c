@@ -2,21 +2,34 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int convert(char *nbr, SpellNode* spell_nodes) {
+    char* ret = find_spelled_out(nbr, spell_nodes);
+    if (ret != NULL) {
+        ft_putstr(ret);
+        return 0;
+    }
 
-void convert(char *nbr, SpellNode* spell_nodes) {
-    while (spell_nodes != NULL) {
-        if (str_equal(nbr, spell_nodes->numerical)) {
-            ft_putstr(spell_nodes->spelled_out);
-            return;
+    if (ft_strlen(nbr) == 2) {
+        char *tens_place = get_tens_place(nbr);
+        if (tens_place == NULL)
+            return -1;
+
+        ret = find_spelled_out(tens_place, spell_nodes);
+        if (ret != NULL) {
+            ft_putstr(ret);
         }
-        spell_nodes = spell_nodes->next;
+        free(tens_place);
+
+        ft_putstr(" ");
+
+        nbr++;
+        ret = find_spelled_out(nbr, spell_nodes);
+        if (ret != NULL) {
+            ft_putstr(ret);
+        }
     }
 
-    if (str_equal(nbr, "21")) {
-        ft_putstr("twenty one");
-        return;
-    }
-    return;
+    return 0;
 }
 
 int main(int argc, char *argv[]) {
@@ -35,7 +48,8 @@ int main(int argc, char *argv[]) {
     }
 
     char *nbr = get_nbr(argv[1]);
-    convert(nbr, spell_nodes);
+    if (convert(nbr, spell_nodes) == -1)
+        return EXIT_FAILURE;
     ft_putstr("\n");
 
     free(nbr);
