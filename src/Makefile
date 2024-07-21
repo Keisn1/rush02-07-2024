@@ -4,23 +4,28 @@
 # @file
 # @version 0.1
 
+# ------------------- VARIABLES ----------------------------------------
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
+FSANITIZE_FLAG = -fsanitize=address
 
-all: rush-02
+NAME = rush-02
 
-rush-02: main.c string.o libft.o errors.o
-	$(CC) $(CFLAGS) -o $@ main.c string.o libft.o errors.o
+MY_SOURCES = 	main.c 			\
+				string.c 		\
+				libft.c			\
+				errors.c		\
+				spell_node.c
 
-string.o: string.c
-	$(CC) $(CFLAGS) -c -o $@ string.c
+MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
-libft.o: libft.c
-	$(CC) $(CFLAGS) -c -o $@ libft.c
+CUR_DIR = $(shell pwd)
 
-errors.o: errors.c
-	$(CC) $(CFLAGS) -c -o $@ errors.c
+# ------------------- RULES ----------------------------------------
+# calls the first rule that it finds in the file
+$(NAME): $(MY_OBJECTS)
+	$(CC) $(CFLAGS) $(FSANITIZE_FLAG) -o $(NAME) $(MY_OBJECTS)
 
-fclean: ; rm -f rush-02 string.o libft.o got
+fclean: ; rm -f rush-02 $(MY_OBJECTS)
 
 # end

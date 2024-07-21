@@ -49,3 +49,26 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 	dest[count] = '\0';
 	return (ft_strlen(src));
 }
+
+void	ft_putnbr(int nb)
+{
+	int		arr[10];
+	int		idx;
+	char	c;
+
+	if (nb < 0)
+		write(STDOUT_FILENO, "-", 1);
+	idx = 0;
+	arr[idx++] = abs(nb % 10);
+	nb = abs(nb / 10);
+	while (nb > 0)
+	{
+		arr[idx++] = nb % 10;
+		nb /= 10;
+	}
+	while (--idx >= 0)
+	{
+		c = arr[idx] + '0';
+		write(STDOUT_FILENO, &c, 1);
+	}
+}

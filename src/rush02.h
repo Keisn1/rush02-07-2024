@@ -35,4 +35,17 @@ void ft_putchar(char c);
 int	ft_strcmp(char *s1, char *s2);
 int ft_strlen(char *s);
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
+void	ft_putnbr(int nb);
+
+/* spell_node */
+typedef struct spell_node {
+    char* numerical;
+    char* spelled_out;
+    struct spell_node* next;
+} SpellNode;
+
+SpellNode* create_node(char* numerical, char* spelled_out);
+void free_spell_nodes(SpellNode *head);
+SpellNode* init_spell_nodes();
+void print_node(SpellNode *sn);
 #endif // RUSH02_H
