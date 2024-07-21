@@ -30,6 +30,14 @@ t_bool	check_nbr(char *str)
 		write(STDERR_FILENO, "Error\n", 7);
 		return (FALSE);
 	}
+
+	str = skip_digits(str);
+
+	if (*str != '\0')
+	{
+		write(STDERR_FILENO, "Error\n", 7);
+		return (FALSE);
+	}
 	return (TRUE);
 }
 

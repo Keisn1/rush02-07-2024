@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:02:39 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 15:02:40 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 20:05:16 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int						error(char *msg, char *suppl);
 
 /* string.c */
 char					*skip_space(char *str);
+char					*skip_digits(char *str);
 int						len_number(char *s);
 t_bool					is_space(char c);
 t_bool					str_equal(char *str1, char *str2);
@@ -62,23 +63,30 @@ typedef struct spell_node
 }						t_SpellNode;
 
 t_SpellNode				*create_node(char *numerical, char *spelled_out);
-t_SpellNode				*init_spell_nodes(char*** dict, int size);
+t_SpellNode				*init_spell_nodes(char ***dict, int size);
 void					free_spell_nodes(t_SpellNode *head);
 void					print_node(t_SpellNode *sn);
 char					*find_spelled_out(char *nbr, t_SpellNode *spell_nodes);
-char ***get_dict();
+char					***get_dict(void);
 
 /* places.c */
 char					*get_tens_place(char *nbr, t_bool fill_with_zeros);
 char					*get_ones_place(char *nbr);
-char	*get_hundreds_place(char *nbr);
+char					*get_hundreds_place(char *nbr);
 
 /* conversions.c */
-int write_ones_place(char *nbr, t_SpellNode *spell_nodes);
+int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
 int						convert_one_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes, t_bool with_whitespace);
 int						convert_two_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes, t_bool with_whitespace);
 int						convert_three_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes, t_bool with_whitespace);
+int						pre_check_3_digits(char *nbr, t_SpellNode *spell_nodes,
+							t_bool with_whitespace);
+int						pre_check(char *nbr, t_SpellNode *spell_nodes,
+							t_bool with_whitespace);
+int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
+int						write_tens_place(char *nbr, t_SpellNode *spell_nodes);
+
 #endif // RUSH02_H

@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:07:59 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 15:21:38 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 20:02:07 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ char	*get_tens_place(char *nbr, t_bool fill_with_zero)
 		ft_putstr("Error");
 		return (NULL);
 	}
-
 	tens_place[0] = nbr[0];
-	if (fill_with_zero) {
+	if (fill_with_zero)
+	{
 		tens_place[1] = '0';
-	} else {
+	}
+	else
+	{
 		tens_place[1] = nbr[1];
 	}
 	tens_place[2] = '\0';

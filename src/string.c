@@ -55,3 +55,10 @@ char	*skip_space(char *str)
 		str++;
 	return (str);
 }
+
+char	*skip_digits(char *str)
+{
+	while (*str && is_digit(*str))
+		str++;
+	return (str);
+}
