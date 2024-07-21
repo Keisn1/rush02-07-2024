@@ -12,7 +12,24 @@
 
 #include "rush02.h"
 
-char	*get_tens_place(char *nbr)
+char	*get_hundreds_place(char *nbr)
+{
+	char	*hundreds_place;
+
+	hundreds_place = (char *)malloc((3 + 1) * sizeof(char));
+	if (hundreds_place == NULL)
+	{
+		ft_putstr("Error");
+		return (NULL);
+	}
+	hundreds_place[0] = nbr[0];
+	hundreds_place[1] = nbr[1];
+	hundreds_place[2] = nbr[2];
+	hundreds_place[3] = '\0';
+	return (hundreds_place);
+}
+
+char	*get_tens_place(char *nbr, t_bool fill_with_zero)
 {
 	char	*tens_place;
 
@@ -22,8 +39,13 @@ char	*get_tens_place(char *nbr)
 		ft_putstr("Error");
 		return (NULL);
 	}
+
 	tens_place[0] = nbr[0];
-	tens_place[1] = '0';
+	if (fill_with_zero) {
+		tens_place[1] = '0';
+	} else {
+		tens_place[1] = nbr[1];
+	}
 	tens_place[2] = '\0';
 	return (tens_place);
 }

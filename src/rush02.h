@@ -69,8 +69,12 @@ char					*find_spelled_out(char *nbr, t_SpellNode *spell_nodes);
 char ***get_dict();
 
 /* places.c */
-char					*get_tens_place(char *nbr);
+char					*get_tens_place(char *nbr, t_bool fill_with_zeros);
 char					*get_ones_place(char *nbr);
+char	*get_hundreds_place(char *nbr);
+
+/* conversions.c */
+int write_ones_place(char *nbr, t_SpellNode *spell_nodes);
 int						convert_one_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes);
 int						convert_two_digit_nbr(char *nbr,

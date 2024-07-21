@@ -22,6 +22,40 @@ int	convert(char *nbr, t_SpellNode *spell_nodes)
 		return (convert_two_digit_nbr(nbr, spell_nodes));
 	if (ft_strlen(nbr) == 3)
 		return (convert_three_digit_nbr(nbr, spell_nodes));
+
+    if (ft_strlen(nbr) == 4) {
+        char* new_nbr = get_ones_place(nbr);
+        convert_one_digit_nbr(new_nbr, spell_nodes);
+        free(new_nbr);
+
+        ft_putstr(" thousand");
+
+        ft_putstr(" ");
+        convert_three_digit_nbr(++nbr, spell_nodes);
+    }
+
+    if (ft_strlen(nbr) == 5) {
+        char* new_nbr = get_tens_place(nbr, FALSE);
+        convert_two_digit_nbr(new_nbr, spell_nodes);
+        free(new_nbr);
+
+        ft_putstr(" thousand");
+
+        ft_putstr(" ");
+        convert_three_digit_nbr(nbr+2, spell_nodes);
+    }
+
+    if (ft_strlen(nbr) == 6) {
+        char* new_nbr = get_hundreds_place(nbr);
+        convert_three_digit_nbr(new_nbr, spell_nodes);
+        free(new_nbr);
+
+        ft_putstr("thousand");
+
+        ft_putstr(" ");
+        convert_three_digit_nbr(nbr+3, spell_nodes);
+    }
+
 	return (0);
 }
 
@@ -37,11 +71,11 @@ int	main(int argc, char *argv[])
 	}
 
 	dict = (char***)malloc(sizeof(char**) * 3);
-    int size = 9;
-	char	*numerical[] = {"0", "1", "2", "3", "10", "11", "20", "100",
+    int size = 11;
+	char	*numerical[] = {"0", "1", "2", "3", "9", "10", "11", "20", "90", "100",
 			"1000"};
-	char	*spelled_out[] = {"zero", "one", "two", "three", "ten", "eleven",
-			"twenty", "hundred", "thousand"};
+	char	*spelled_out[] = {"zero", "one", "two", "three", "nine", "ten", "eleven",
+			"twenty", "ninety", "hundred", "thousand"};
     dict[0] = numerical;
     dict[1] = spelled_out;
 	spell_nodes = init_spell_nodes(dict, size);

@@ -12,6 +12,24 @@
 
 #include "rush02.h"
 
+
+int	pre_check_3_digits(char *nbr, t_SpellNode *spell_nodes )
+{
+	/* char	*ret; */
+
+	if (str_equal(nbr, "000"))
+		return (0);
+	if (*nbr == '0')
+		return (convert_two_digit_nbr(++nbr, spell_nodes));
+	/* ret = find_spelled_out(nbr, spell_nodes); */
+	/* if (ret != NULL) */
+	/* { */
+	/* 	ft_putstr(ret); */
+	/* 	return (0); */
+	/* } */
+	return (1);
+}
+
 int	pre_check(char *nbr, t_SpellNode *spell_nodes)
 {
 	char	*ret;
@@ -29,6 +47,30 @@ int	pre_check(char *nbr, t_SpellNode *spell_nodes)
 	return (1);
 }
 
+int write_ones_place(char *nbr, t_SpellNode *spell_nodes) {
+	char* ones_place = get_ones_place(nbr);
+	if (ones_place == NULL)
+		return (-1);
+	char* ret = find_spelled_out(ones_place, spell_nodes);
+	if (ret == NULL)
+		return (error("find spelled_out", ones_place));
+	ft_putstr(ret);
+    free(ones_place);
+    return 0;
+}
+
+int write_tens_place(char *nbr, t_SpellNode *spell_nodes) {
+	char* tens_place = get_tens_place(nbr, TRUE);
+	if (tens_place == NULL)
+		return (error("memory allocation", "tens_place"));
+	char* ret = find_spelled_out(tens_place, spell_nodes);
+	if (ret == NULL)
+		return (error("find spelled_out", tens_place));
+	ft_putstr(ret);
+	free(tens_place);
+    return 0;
+}
+
 int	convert_one_digit_nbr(char *nbr, t_SpellNode *spell_nodes)
 {
 	char	*ret;
@@ -40,21 +82,14 @@ int	convert_one_digit_nbr(char *nbr, t_SpellNode *spell_nodes)
 	return (0);
 }
 
+
 int	convert_two_digit_nbr(char *nbr, t_SpellNode *spell_nodes)
 {
 	char	*ret;
-	char	*tens_place;
 
 	if (!pre_check(nbr, spell_nodes))
 		return (0);
-	tens_place = get_tens_place(nbr);
-	if (tens_place == NULL)
-		return (error("memory allocation", "tens_place"));
-	ret = find_spelled_out(tens_place, spell_nodes);
-	if (ret == NULL)
-		return (error("find spelled_out", tens_place));
-	ft_putstr(ret);
-	free(tens_place);
+    write_tens_place(nbr, spell_nodes);
 	nbr++;
 	ret = find_spelled_out(nbr, spell_nodes);
 	if (ret == NULL)
@@ -64,19 +99,15 @@ int	convert_two_digit_nbr(char *nbr, t_SpellNode *spell_nodes)
 	return (0);
 }
 
+
 int	convert_three_digit_nbr(char *nbr, t_SpellNode *spell_nodes)
 {
-	char	*ones_place;
 	char	*ret;
 
-	ones_place = get_ones_place(nbr);
-	if (ones_place == NULL)
-		return (-1);
-	ret = find_spelled_out(ones_place, spell_nodes);
-	if (ret == NULL)
-		return (error("find spelled_out", ones_place));
-	ft_putstr(ret);
-	free(ones_place);
+    if (!pre_check_3_digits(nbr, spell_nodes)) {
+		return (0);
+    }
+    write_ones_place(nbr, spell_nodes);
 	ft_putstr(" ");
 	ret = find_spelled_out("100", spell_nodes);
 	if (ret == NULL)
