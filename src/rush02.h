@@ -76,9 +76,9 @@ char	*get_hundreds_place(char *nbr);
 /* conversions.c */
 int write_ones_place(char *nbr, t_SpellNode *spell_nodes);
 int						convert_one_digit_nbr(char *nbr,
-							t_SpellNode *spell_nodes);
+							t_SpellNode *spell_nodes, t_bool with_whitespace);
 int						convert_two_digit_nbr(char *nbr,
-							t_SpellNode *spell_nodes);
+							t_SpellNode *spell_nodes, t_bool with_whitespace);
 int						convert_three_digit_nbr(char *nbr,
-							t_SpellNode *spell_nodes);
+							t_SpellNode *spell_nodes, t_bool with_whitespace);
 #endif // RUSH02_H

@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "rush02.h"
-#include <stdlib.h>
-int	convert(char *nbr, t_SpellNode *spell_nodes);
 
-int my_fun(int rest, char* nbr, t_SpellNode* spell_nodes) {
+int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first);
+
+int my_fun(int rest, char* nbr, t_SpellNode* spell_nodes, t_bool first) {
 	char	*new_nbr;
 	char	*new_nbr2;
 	char* ret;
@@ -30,40 +30,42 @@ int my_fun(int rest, char* nbr, t_SpellNode* spell_nodes) {
 
 	if (rest == 1) {
 		new_nbr = get_ones_place(nbr);
-		convert_one_digit_nbr(new_nbr, spell_nodes);
+		convert_one_digit_nbr(new_nbr, spell_nodes, !first);
 		nbr += rest;
 	}
 	if (rest == 2) {
 		new_nbr = get_tens_place(nbr, FALSE);
-		convert_two_digit_nbr(new_nbr, spell_nodes);
+		convert_two_digit_nbr(new_nbr, spell_nodes, !first);
 		nbr += rest;
 	}
 	if (rest == 0) {
 		new_nbr = get_hundreds_place(nbr);
-		convert_three_digit_nbr(new_nbr, spell_nodes);
+		convert_three_digit_nbr(new_nbr, spell_nodes, !first);
 		nbr +=3;
 	}
 	free(new_nbr);
 
 	ret = find_spelled_out(new_nbr2, spell_nodes);
+	ft_putstr(" ");
 	ft_putstr(ret);
 	free(new_nbr2);
-	convert(nbr, spell_nodes);
+
+	convert(nbr, spell_nodes, FALSE);
 	return (0);
 }
 
-int	convert(char *nbr, t_SpellNode *spell_nodes)
+int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 {
 	int		rest;
 
 	if (ft_strlen(nbr) == 1)
-		return (convert_one_digit_nbr(nbr, spell_nodes));
+		return (convert_one_digit_nbr(nbr, spell_nodes, !first));
 	if (ft_strlen(nbr) == 2)
-		return (convert_two_digit_nbr(nbr, spell_nodes));
+		return (convert_two_digit_nbr(nbr, spell_nodes, !first));
 	if (ft_strlen(nbr) == 3)
-		return (convert_three_digit_nbr(nbr, spell_nodes));
+		return (convert_three_digit_nbr(nbr, spell_nodes, !first));
 	rest = ft_strlen(nbr) % 3;
-	return my_fun(rest, nbr, spell_nodes);
+	return my_fun(rest, nbr, spell_nodes, first);
 }
 
 int	main(int argc, char *argv[])
@@ -96,7 +98,7 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 	nbr = get_nbr(argv[1]);
-	if (convert(nbr, spell_nodes) == -1)
+	if (convert(nbr, spell_nodes, TRUE) == -1)
 		return (EXIT_FAILURE);
 	ft_putstr("\n");
 	free(nbr);
