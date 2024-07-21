@@ -21,6 +21,7 @@ typedef enum BOOL_ {
 t_bool check_args(int argc);
 t_bool check_nbr(char *str);
 char *get_nbr(char *str);
+int error(char *msg, char *suppl);
 
 /* string.c */
 char* skip_space(char *str);
@@ -36,6 +37,8 @@ int	ft_strcmp(char *s1, char *s2);
 int ft_strlen(char *s);
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
 void	ft_putnbr(int nb);
+void ft_putchar_err(char c);
+void ft_putstr_err(char *str);
 
 /* spell_node */
 typedef struct spell_node {
@@ -53,5 +56,6 @@ char *find_spelled_out(char* nbr, SpellNode *spell_nodes);
 /* places.c */
 char *get_tens_place(char *nbr);
 char *get_ones_place(char *nbr);
-
+int convert_two_digit_nbr(char *nbr, SpellNode* spell_nodes);
+int convert_three_digit_nbr(char *nbr, SpellNode* spell_nodes);
 #endif // RUSH02_H

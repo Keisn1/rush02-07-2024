@@ -5,8 +5,18 @@ void ft_putstr(char *str) {
         ft_putchar(*str++);
 }
 
+void ft_putstr_err(char *str) {
+    while (*str)
+        ft_putchar_err(*str++);
+}
+
+
 void ft_putchar(char c) {
     write(STDOUT_FILENO, &c, 1);
+}
+
+void ft_putchar_err(char c) {
+    write(STDERR_FILENO, &c, 1);
 }
 
 

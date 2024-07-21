@@ -9,64 +9,11 @@ int convert(char *nbr, SpellNode* spell_nodes) {
         return 0;
     }
 
-    if (ft_strlen(nbr) == 2) {
-        char *tens_place = get_tens_place(nbr);
-        if (tens_place == NULL)
-            return -1;
+    if (ft_strlen(nbr) == 2)
+        return convert_two_digit_nbr(nbr, spell_nodes);
 
-        ret = find_spelled_out(tens_place, spell_nodes);
-        if (ret != NULL) {
-            ft_putstr(ret);
-        }
-        free(tens_place);
-
-        ft_putstr(" ");
-
-        nbr++;
-        ret = find_spelled_out(nbr, spell_nodes);
-        if (ret != NULL) {
-            ft_putstr(ret);
-        }
-    }
-
-    if (ft_strlen(nbr) == 3) {
-        char *ones_place = get_ones_place(nbr);
-        if (ones_place == NULL)
-            return -1;
-
-        ret = find_spelled_out(ones_place, spell_nodes);
-        if (ret != NULL) {
-            ft_putstr(ret);
-        }
-
-        ft_putstr(" ");
-        ret = find_spelled_out("100", spell_nodes);
-        if (ret != NULL) {
-            ft_putstr(ret);
-        }
-        free(ones_place);
-
-        ft_putstr(" ");
-
-        nbr++;
-        char *tens_place = get_tens_place(nbr);
-        if (tens_place == NULL)
-            return -1;
-
-        ret = find_spelled_out(tens_place, spell_nodes);
-        if (ret != NULL) {
-            ft_putstr(ret);
-        }
-        free(tens_place);
-
-        ft_putstr(" ");
-
-        nbr++;
-        ret = find_spelled_out(nbr, spell_nodes);
-        if (ret != NULL) {
-            ft_putstr(ret);
-        }
-    }
+    if (ft_strlen(nbr) == 3)
+        return convert_three_digit_nbr(nbr, spell_nodes);
 
     return 0;
 }

@@ -16,3 +16,13 @@ t_bool check_nbr(char *str) {
     }
     return TRUE;
 }
+
+int error(char *type, char *suppl) {
+    if (str_equal(type, "find spelled_out")) {
+        ft_putstr_err("Error finding");
+        ft_putstr_err(suppl);
+        ft_putstr_err("\n");
+        return -1;
+    }
+    return -1;
+}

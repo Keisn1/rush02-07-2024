@@ -22,3 +22,48 @@ char *get_ones_place(char *nbr) {
     ones_place[1] = '\0';
     return ones_place;
 }
+
+int convert_two_digit_nbr(char *nbr, SpellNode* spell_nodes) {
+        char *tens_place = get_tens_place(nbr);
+        if (tens_place == NULL)
+            return -1;
+
+        char* ret = find_spelled_out(tens_place, spell_nodes);
+        if (ret == NULL) 
+            return error("find spelled_out", tens_place);
+        ft_putstr(ret);
+        free(tens_place);
+
+        ft_putstr(" ");
+
+        nbr++;
+        ret = find_spelled_out(nbr, spell_nodes);
+        if (ret == NULL) 
+            return error("find spelled_out", nbr);
+        ft_putstr(ret);
+        return 0;
+}
+
+int convert_three_digit_nbr(char *nbr, SpellNode* spell_nodes) {
+        char *ones_place = get_ones_place(nbr);
+        if (ones_place == NULL)
+            return -1;
+
+        char* ret = find_spelled_out(ones_place, spell_nodes);
+        if (ret == NULL)  
+            return error("find spelled_out", ones_place);
+
+        ft_putstr(ret);
+        free(ones_place);
+
+        ft_putstr(" ");
+        ret = find_spelled_out("100", spell_nodes);
+        if (ret == NULL) 
+            return error("find spelled_out", "100");
+
+        ft_putstr(ret);
+        ft_putstr(" ");
+
+        nbr++;
+        return convert_two_digit_nbr(nbr, spell_nodes);
+}
