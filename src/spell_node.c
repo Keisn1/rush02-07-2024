@@ -12,13 +12,13 @@ SpellNode* create_node(char* numerical, char* spelled_out) {
 }
 
 SpellNode* init_spell_nodes() {
-    char* numerical[] = {"0", "1", "2", "10", "11", "20" };
-    char* spelled_out[] = {"zero", "one", "two", "ten", "eleven", "twenty"};
+    char* numerical[] = {"0", "1", "2","3", "10", "11", "20", "100" };
+    char* spelled_out[] = {"zero", "one", "two", "three", "ten", "eleven", "twenty", "hundred"};
     SpellNode* head = NULL;
     SpellNode* current = NULL;
     int count = 0;
 
-    while (count < 6) {
+    while (count < 8) {
         SpellNode* newNode = create_node(numerical[count], spelled_out[count]);
         if (head == NULL) {
             head = newNode;

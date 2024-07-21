@@ -52,5 +52,6 @@ char *find_spelled_out(char* nbr, SpellNode *spell_nodes);
 
 /* places.c */
 char *get_tens_place(char *nbr);
+char *get_ones_place(char *nbr);
 
 #endif // RUSH02_H
