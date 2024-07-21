@@ -2,15 +2,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int convert(char *nbr, SpellNode* spell_nodes) {
+int convert(char *nbr, t_SpellNode* spell_nodes) {
 
     if (ft_strlen(nbr) == 1)
         return convert_one_digit_nbr(nbr, spell_nodes);
-    /* char* ret = find_spelled_out(nbr, spell_nodes); */
-    /* if (ret != NULL) { */
-    /*     ft_putstr(ret); */
-    /*     return 0; */
-    /* } */
 
     if (ft_strlen(nbr) == 2)
         return convert_two_digit_nbr(nbr, spell_nodes);
@@ -26,7 +21,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    SpellNode* spell_nodes = init_spell_nodes();
+    t_SpellNode* spell_nodes = init_spell_nodes();
 
     ft_putstr(argv[1]);
     ft_putstr(": ");

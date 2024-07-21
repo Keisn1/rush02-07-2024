@@ -23,7 +23,7 @@ char *get_ones_place(char *nbr) {
     return ones_place;
 }
 
-int convert_one_digit_nbr(char *nbr, SpellNode* spell_nodes) {
+int convert_one_digit_nbr(char *nbr, t_SpellNode* spell_nodes) {
     char* ret = find_spelled_out(nbr, spell_nodes);
     if (ret == NULL) 
         return error("find spelled_out", nbr);
@@ -31,12 +31,24 @@ int convert_one_digit_nbr(char *nbr, SpellNode* spell_nodes) {
     return 0;
 }
 
-int convert_two_digit_nbr(char *nbr, SpellNode* spell_nodes) {
+int convert_two_digit_nbr(char *nbr, t_SpellNode* spell_nodes) {
+        if (str_equal(nbr, "00"))
+            return 0;
+
+        if (*nbr == '0')
+            return convert_one_digit_nbr(++nbr, spell_nodes);
+
+        char* ret = find_spelled_out(nbr, spell_nodes);
+        if (ret != NULL) {
+            ft_putstr(ret);
+            return 0;
+        }
+
         char *tens_place = get_tens_place(nbr);
         if (tens_place == NULL)
             return -1;
 
-        char* ret = find_spelled_out(tens_place, spell_nodes);
+        ret = find_spelled_out(tens_place, spell_nodes);
         if (ret == NULL) 
             return error("find spelled_out", tens_place);
         ft_putstr(ret);
@@ -52,7 +64,7 @@ int convert_two_digit_nbr(char *nbr, SpellNode* spell_nodes) {
         return 0;
 }
 
-int convert_three_digit_nbr(char *nbr, SpellNode* spell_nodes) {
+int convert_three_digit_nbr(char *nbr, t_SpellNode* spell_nodes) {
         char *ones_place = get_ones_place(nbr);
         if (ones_place == NULL)
             return -1;
@@ -72,7 +84,5 @@ int convert_three_digit_nbr(char *nbr, SpellNode* spell_nodes) {
 
         ft_putstr(" ");
         nbr++;
-        if (str_equal(nbr, "00"))
-            return 0;
         return convert_two_digit_nbr(nbr, spell_nodes);
 }

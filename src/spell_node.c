@@ -1,7 +1,7 @@
 #include "rush02.h"
 
-SpellNode* create_node(char* numerical, char* spelled_out) {
-        SpellNode* newNode = (SpellNode*)malloc(sizeof(SpellNode));
+t_SpellNode* create_node(char* numerical, char* spelled_out) {
+        t_SpellNode* newNode = (t_SpellNode*)malloc(sizeof(t_SpellNode));
         if (newNode == NULL) {
             ft_putstr("memory allocation failed");
         }
@@ -11,15 +11,15 @@ SpellNode* create_node(char* numerical, char* spelled_out) {
         return newNode;
 }
 
-SpellNode* init_spell_nodes() {
+t_SpellNode* init_spell_nodes() {
     char* numerical[] = {"0", "1", "2","3", "10", "11", "20", "100" };
     char* spelled_out[] = {"zero", "one", "two", "three", "ten", "eleven", "twenty", "hundred"};
-    SpellNode* head = NULL;
-    SpellNode* current = NULL;
+    t_SpellNode* head = NULL;
+    t_SpellNode* current = NULL;
     int count = 0;
 
     while (count < 8) {
-        SpellNode* newNode = create_node(numerical[count], spelled_out[count]);
+        t_SpellNode* newNode = create_node(numerical[count], spelled_out[count]);
         if (head == NULL) {
             head = newNode;
             current = head;
@@ -33,9 +33,9 @@ SpellNode* init_spell_nodes() {
     return head;
 }
 
-void free_spell_nodes(SpellNode *head) {
-    SpellNode* next = head;
-    SpellNode* current = head;
+void free_spell_nodes(t_SpellNode *head) {
+    t_SpellNode* next = head;
+    t_SpellNode* current = head;
 
     while (current != NULL) {
         next = current->next;
@@ -46,7 +46,7 @@ void free_spell_nodes(SpellNode *head) {
     return;
 }
 
-char *find_spelled_out(char* nbr, SpellNode *spell_nodes) {
+char *find_spelled_out(char* nbr, t_SpellNode *spell_nodes) {
     while (spell_nodes != NULL) {
         if (str_equal(nbr, spell_nodes->numerical))
             return spell_nodes->spelled_out;
@@ -56,7 +56,7 @@ char *find_spelled_out(char* nbr, SpellNode *spell_nodes) {
 }
 
 
-void print_node(SpellNode *sn) {
+void print_node(t_SpellNode *sn) {
     ft_putstr("Numerical: ");
     ft_putstr(sn->numerical);
     ft_putstr("\n");
