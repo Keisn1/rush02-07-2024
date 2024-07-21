@@ -56,6 +56,7 @@ char *find_spelled_out(char* nbr, SpellNode *spell_nodes);
 /* places.c */
 char *get_tens_place(char *nbr);
 char *get_ones_place(char *nbr);
+int convert_one_digit_nbr(char *nbr, SpellNode* spell_nodes);
 int convert_two_digit_nbr(char *nbr, SpellNode* spell_nodes);
 int convert_three_digit_nbr(char *nbr, SpellNode* spell_nodes);
 #endif // RUSH02_H
