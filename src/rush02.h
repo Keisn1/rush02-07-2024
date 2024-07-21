@@ -80,7 +80,7 @@ char					*get_hundreds_place(char *nbr);
 /* conversions.c */
 
 int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first);
-int	convert_bigger(char *nbr, t_SpellNode *spell_nodes, t_bool first);
+int	convert_larger_999(char *nbr, t_SpellNode *spell_nodes, t_bool first);
 int	convert_prefix(int rest, char *nbr, t_SpellNode *spell_nodes, t_bool first);
 int						convert_one_digit_nbr(char *nbr,
 							t_SpellNode *spell_nodes, t_bool with_whitespace);

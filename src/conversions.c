@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:21:45 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 22:10:59 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 22:19:45 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 		return (convert_two_digit_nbr(nbr, spell_nodes, !first));
 	if (ft_strlen(nbr) == 3)
 		return (convert_three_digit_nbr(nbr, spell_nodes, !first));
-	return (convert_bigger(nbr, spell_nodes, first));
+	return (convert_larger_999(nbr, spell_nodes, first));
 }
 
-int	convert_bigger(char *nbr, t_SpellNode *spell_nodes, t_bool first)
-{
+int convert_cubics(char *nbr, t_SpellNode* spell_nodes, t_bool first) {
 	char	*new_nbr2;
-	char	*ret;
+	char *ret;
+	int		rest;
 	int		size;
 	int		i;
-	int		rest;
 
+	rest = ft_strlen(nbr) % 3;
 	rest = ft_strlen(nbr) % 3;
 	size = (((ft_strlen(nbr) - 1) / 3) * 3) + 2;
 	new_nbr2 = (char *)malloc(sizeof(char) * size);
@@ -41,11 +41,21 @@ int	convert_bigger(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 		new_nbr2[i++] = '0';
 	}
 	new_nbr2[size - 1] = '\0';
-	nbr += convert_prefix(rest, nbr, spell_nodes, first);
+
+	size = convert_prefix(rest, nbr, spell_nodes, first);
 	ret = find_spelled_out(new_nbr2, spell_nodes);
 	ft_putstr(" ");
 	ft_putstr(ret);
 	free(new_nbr2);
+	return size;
+}
+
+int	convert_larger_999(char *nbr, t_SpellNode *spell_nodes, t_bool first)
+{
+	int		size;
+
+	size = convert_cubics(nbr, spell_nodes, first);
+	nbr += size;
 	nbr = skip_zeros(nbr);
 	if (*nbr == '\0')
 		return (0);
