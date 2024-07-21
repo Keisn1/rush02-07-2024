@@ -12,13 +12,14 @@ FSANITIZE_FLAG = -fsanitize=address
 NAME = rush-02
 
 MY_SOURCES = 	main.c		\
-		string.c	\
-		libft.c		\
-		libft2.c	\
 		errors.c	\
 		spell_node.c	\
+		conversions.c	\
 		places.c	\
-		conversions.c
+		libft.c		\
+		libft2.c	\
+		string.c	\
+		string2.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

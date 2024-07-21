@@ -6,7 +6,7 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:22:02 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 15:25:08 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 15:30:18 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,42 @@
 
 t_SpellNode	*create_node(char *numerical, char *spelled_out)
 {
-	t_SpellNode	*newNode;
+	t_SpellNode	*new_node;
 
-	newNode = (t_SpellNode *)malloc(sizeof(t_SpellNode));
-	if (newNode == NULL)
+	new_node = (t_SpellNode *)malloc(sizeof(t_SpellNode));
+	if (new_node == NULL)
 	{
 		ft_putstr("memory allocation failed");
 	}
-	newNode->numerical = numerical;
-	newNode->spelled_out = spelled_out;
-	newNode->next = NULL;
-	return (newNode);
+	new_node->numerical = numerical;
+	new_node->spelled_out = spelled_out;
+	new_node->next = NULL;
+	return (new_node);
 }
 
-
-
-t_SpellNode	*init_spell_nodes()
+t_SpellNode	*init_spell_nodes(void)
 {
 	char		*numerical[] = {"0", "1", "2", "3", "10", "11", "20", "100"};
 	char		*spelled_out[] = {"zero", "one", "two", "three", "ten", "eleven", "twenty", "hundred"};
 	t_SpellNode	*head;
 	t_SpellNode	*current;
 	int			count;
-	t_SpellNode	*newNode;
+	t_SpellNode	*new_node;
 
 	head = NULL;
 	current = NULL;
 	count = 0;
 	while (count < 8)
 	{
-		newNode = create_node(numerical[count], spelled_out[count]);
+		new_node = create_node(numerical[count], spelled_out[count]);
 		if (head == NULL)
 		{
-			head = newNode;
+			head = new_node;
 			current = head;
 			count++;
 			continue ;
 		}
-		current->next = newNode;
+		current->next = new_node;
 		current = current->next;
 		count++;
 	}

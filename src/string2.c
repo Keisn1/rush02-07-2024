@@ -12,46 +12,17 @@
 
 #include "rush02.h"
 
-t_bool	is_space(char c)
+char	*get_nbr(char *str)
 {
-	if (c >= '\t' && c <= '\r')
-		return (TRUE);
-	if (c == ' ')
-		return (TRUE);
-	return (FALSE);
-}
+	char	*nbr;
 
-t_bool	is_digit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (TRUE);
-	return (FALSE);
-}
-
-t_bool	str_equal(char *str1, char *str2)
-{
-	if (ft_strcmp(str1, str2))
+	str = skip_space(str);
+	nbr = (char *)malloc(len_number(str) + 1 * sizeof(char));
+	if (nbr == NULL)
 	{
-		return (FALSE);
+		write(STDERR_FILENO, "Error\n", 7);
+		return (NULL);
 	}
-	return (TRUE);
-}
-
-int	len_number(char *s)
-{
-	int	count;
-
-	count = 0;
-	while (s[count] && is_digit(s[count]))
-	{
-		count++;
-	}
-	return (count);
-}
-
-char	*skip_space(char *str)
-{
-	while (*str && is_space(*str))
-		str++;
-	return (str);
+	ft_strlcpy(nbr, str, len_number(str) + 1);
+	return (nbr);
 }
