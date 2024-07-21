@@ -46,12 +46,14 @@ t_bool is_zero(char *str) {
 	return TRUE;
 }
 
-int	convert_bigger(int rest, char *nbr, t_SpellNode *spell_nodes, t_bool first)
+int	convert_bigger(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 {
 	char	*new_nbr2;
 	char	*ret;
 	int		size;
 	int i;
+
+	int rest = ft_strlen(nbr) % 3;
 
 	size = (((ft_strlen(nbr) - 1) / 3) * 3) + 2;
 	new_nbr2 = (char *)malloc(sizeof(char) * size);
@@ -90,8 +92,7 @@ int	convert(char *nbr, t_SpellNode *spell_nodes, t_bool first)
 	if (ft_strlen(nbr) == 3)
 		return (convert_three_digit_nbr(nbr, spell_nodes, !first));
 
-	rest = ft_strlen(nbr) % 3;
-	return (convert_bigger(rest, nbr, spell_nodes, first));
+	return (convert_bigger(nbr, spell_nodes, first));
 }
 
 int	main(int argc, char** argv)
