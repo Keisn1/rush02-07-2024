@@ -6,13 +6,14 @@
 /*   By: kfreyer <kfreyer@student.42wolfsburg.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:07:39 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/21 22:07:16 by kfreyer          ###   ########.fr       */
+/*   Updated: 2024/07/21 22:29:57 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush02.h"
 
-void free_objects(t_SpellNode* spell_nodes, char* nbr, int fd) {
+void	free_objects(t_SpellNode *spell_nodes, char *nbr, int fd)
+{
 	free(nbr);
 	free_spell_nodes(spell_nodes);
 	close_file(&fd);
@@ -39,7 +40,6 @@ int	main(int argc, char **argv)
 	nbr = parse_nbr(argv[1]);
 	if (convert(nbr, spell_nodes, TRUE) < 0)
 	{
-
 		free_objects(spell_nodes, nbr, fd);
 		return (EXIT_FAILURE);
 	}
