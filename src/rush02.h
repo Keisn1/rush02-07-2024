@@ -16,6 +16,7 @@
 /* libraries */
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 /* Makro Symbols */
 # define EXIT_FAILURE 1
@@ -28,8 +29,7 @@ typedef enum BOOL_
 	TRUE,
 }						t_bool;
 
-/* prototypes */
-
+/* ------------------------   prototypes  ---------------------------*/
 /* errors.c */
 t_bool					check_args(int argc);
 t_bool					check_nbr(char *str);
@@ -53,6 +53,8 @@ unsigned int			ft_strlcpy(char *dest, char *src, unsigned int size);
 void					ft_putnbr(int nb);
 void					ft_putchar_err(char c);
 void					ft_putstr_err(char *str);
+char* ft_strchr(char* str, int c);
+char *ft_strdup(char *src);
 
 /* spell_node */
 typedef struct spell_node
@@ -88,5 +90,10 @@ int						pre_check(char *nbr, t_SpellNode *spell_nodes,
 							t_bool with_whitespace);
 int						write_ones_place(char *nbr, t_SpellNode *spell_nodes);
 int						write_tens_place(char *nbr, t_SpellNode *spell_nodes);
+
+/* nick.c */
+int open_file(int *fd, char* filename);
+int close_file(int *fd);
+int read_file(int *fd, char *buffer, int buffer_size);
 
 #endif // RUSH02_H

@@ -99,6 +99,14 @@ int	main(int argc, char *argv[])
 	dict[1] = spelled_out;
 	spell_nodes = init_spell_nodes(dict, size);
 	free(dict);
+
+	/* int fd; */
+    /* char buffer[1024]; */
+    /* open_file(&fd, "numbers.dict"); */
+    /* fd = 0; */
+    /* read_file(&fd, buffer, sizeof(buffer)); */
+    /* parse_buffer(buffer, &list_size, list); */
+
 	ft_putstr(argv[1]);
 	ft_putstr(": ");
 	if (!check_nbr(argv[1]))
@@ -113,5 +121,6 @@ int	main(int argc, char *argv[])
 	free(nbr);
 	free_spell_nodes(spell_nodes);
 
+    /* close_file(&fd); */
 	return (EXIT_SUCCESS);
 }
