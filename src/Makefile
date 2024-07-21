@@ -14,6 +14,7 @@ NAME = rush-02
 MY_SOURCES = 	main.c		\
 		errors.c	\
 		spell_node.c	\
+		spell_node2.c	\
 		conversions.c	\
 		places.c	\
 		libft.c		\
